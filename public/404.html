@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Presentation Timer</title>
+    <script>
+      // GitHub Pages serves this file for any path that doesn't exist.
+      // The timer only lives at the site root, so send the visitor there and
+      // keep the query string (?end=...) so shared/hand-built links still work.
+      (function () {
+        var l = window.location;
+        // On <user>.github.io this app is a project site served under /<repo>/;
+        // on a custom domain it is served from /.
+        var first = l.pathname.split('/')[1];
+        var root = /\.github\.io$/i.test(l.hostname) && first ? '/' + first + '/' : '/';
+        // Guard against a redirect loop if the root itself doesn't exist.
+        if (l.pathname !== root) l.replace(root + l.search + l.hash);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Page not found. Redirecting to the timer&hellip;</p>
+  </body>
+</html>
