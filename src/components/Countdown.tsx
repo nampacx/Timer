@@ -46,6 +46,26 @@ export default function Countdown({ params, onReset }: Props) {
 
   const closeQr = useCallback(() => setShowQr(false), [])
 
+  const digits = (
+    <div className="digits" role="timer" aria-live="off">
+      {done ? (
+        <span className="times-up">Time's up!</span>
+      ) : (
+        <>
+          {h > 0 && (
+            <>
+              <span>{pad(h)}</span>
+              <span className="sep">:</span>
+            </>
+          )}
+          <span>{pad(m)}</span>
+          <span className="sep">:</span>
+          <span>{pad(s)}</span>
+        </>
+      )}
+    </div>
+  )
+
   return (
     <main className={`countdown state-${state}`}>
       {title && <h1 className="countdown-title">{title}</h1>}
@@ -64,23 +84,7 @@ export default function Countdown({ params, onReset }: Props) {
             />
           </svg>
         )}
-        <div className="digits" role="timer" aria-live="off">
-          {done ? (
-            <span className="times-up">Time's up!</span>
-          ) : (
-            <>
-              {h > 0 && (
-                <>
-                  <span>{pad(h)}</span>
-                  <span className="sep">:</span>
-                </>
-              )}
-              <span>{pad(m)}</span>
-              <span className="sep">:</span>
-              <span>{pad(s)}</span>
-            </>
-          )}
-        </div>
+        {digits}
       </div>
 
       <p className="ends-at">Ends at {formatClock(end)}</p>
@@ -100,7 +104,11 @@ export default function Countdown({ params, onReset }: Props) {
         </button>
       </nav>
 
-      {showQr && <QrModal url={shareUrl} onClose={closeQr} />}
+      {showQr && (
+        <QrModal url={shareUrl} onClose={closeQr}>
+          {digits}
+        </QrModal>
+      )}
     </main>
   )
 }
