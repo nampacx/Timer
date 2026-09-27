@@ -157,8 +157,43 @@ button.primary:hover:not(:disabled) { filter: brightness(1.1); }
 .sep { opacity: 0.6; margin: 0 0.02em; }
 .times-up { font-family: Inter, system-ui, sans-serif; font-size: 0.6em; }
 
-.state-critical .digits, .state-done .digits { animation: pulse 1s ease-in-out infinite; }
+.state-critical .digits { animation: pulse 1s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: 0.55; } }
+
+/* ---------- Time's up ---------- */
+/* Full-screen red flash: a burst of fast flashes, then a slow glow that keeps going.
+   Both stay under 3 flashes per second (photosensitivity guideline). */
+.countdown.state-done::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background: var(--done);
+  opacity: 0;
+  animation: flash 0.5s ease-out 8, glow 2s ease-in-out 4s infinite;
+}
+@keyframes flash { 0% { opacity: 0.55; } 100% { opacity: 0; } }
+@keyframes glow { 50% { opacity: 0.18; } }
+
+.state-done .digits { animation: pop 1s ease-in-out infinite; }
+@keyframes pop {
+  0%, 100% { transform: scale(1); }
+  10% { transform: scale(1.12) rotate(-2deg); }
+  20% { transform: scale(1.12) rotate(2deg); }
+  30% { transform: scale(1.12) rotate(-2deg); }
+  40% { transform: scale(1); }
+}
+.state-done .ring-track {
+  stroke: var(--done);
+  filter: drop-shadow(0 0 2px var(--done));
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown.state-done::before { animation: none; opacity: 0.15; }
+  .state-done .digits, .state-done .ring-track, .state-critical .digits { animation: none; }
+}
 
 .ends-at { margin: 0; color: var(--muted); font-size: clamp(0.9rem, 2vw, 1.2rem); }
 
