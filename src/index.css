@@ -201,3 +201,7 @@ button.primary:hover:not(:disabled) { filter: brightness(1.1); }
 .qr svg { width: min(80vw, 62vh); height: auto; }
 .modal-caption { margin: 0; font-size: 1.3rem; font-weight: 600; }
 .modal-url { color: var(--muted); font-size: 0.9rem; overflow-wrap: anywhere; text-align: center; max-width: 36rem; }
+.modal-timer { line-height: 1; }
+.modal .digits,
+.modal .digits:has(> span:nth-child(5)) { font-size: min(14vw, 11vh); }
+.modal:has(.modal-timer) .qr svg { width: min(80vw, 48vh); }
