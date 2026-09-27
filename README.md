@@ -1,44 +1,38 @@
-# Presentation Timer
+# ⏱️ Presentation Timer
 
-A countdown timer for presentations, built with React + Vite and hosted on GitHub Pages.
+A simple, full-screen countdown timer for presentations, talks, workshops, and breaks. Set a duration, add an optional title, and share the countdown so everyone can follow along.
 
-- Set a duration (hh:mm:ss), press **Start**, and get a big full-screen countdown.
-- Share the countdown with a link: the **end time lives in the URL**, so no server or session is needed and everyone who opens the link sees the same countdown.
-- Show a **QR code** that points to that link.
+- 🕒 Choose a duration in hours, minutes, and seconds, or use a quick preset.
+- 🎤 Keep the countdown large and visible while presenting.
+- 🔗 Share a link or show its QR code so attendees can open the same timer.
+- ✍️ Add an optional title, such as "Coffee break" or a session name.
 
-## URL format
+## 📸 Screenshots
 
-```
-https://<user>.github.io/Timer/?end=<time>[&start=<time>][&title=<text>]
-```
+### 🛠️ Set up a timer
 
-| Parameter | Required | Meaning |
-|-----------|----------|---------|
-| `end`     | yes | When the timer expires. Unix seconds (`1790000000`), unix milliseconds (`1790000000000`) or ISO 8601 (`2026-09-27T14:30:00Z`, `2026-09-27T14:30:00+02:00`; without an offset it's the viewer's local time). |
-| `start`   | no  | When the timer started (same formats). If present, a progress ring is shown. |
-| `title`   | no  | Heading shown above the countdown. |
+Choose a duration and optional title, then start the countdown.
 
-Examples you can build by hand:
+<p align="center"><img src="assets/start.png" alt="Presentation Timer setup screen with duration presets and optional title" width="720"></p>
 
-- `…/Timer/?end=2026-09-27T14:30:00Z`
-- `…/Timer/?end=2026-09-27T14:30:00+02:00&title=Coffee%20break`
+### ⏳ Follow the countdown
 
-Without `end` (or with an unreadable one) the setup screen is shown.
+The active timer fills the screen, with controls for copying the link, opening the QR code, switching to fullscreen, or starting a new timer.
 
-## Why this works on GitHub Pages
+<p align="center"><img src="assets/running.png" alt="Full-screen countdown with progress ring and sharing controls" width="720"></p>
 
-GitHub Pages is a static host with no SPA fallback, so the app deliberately has **no client-side routes**: everything is `index.html` at the site root and all state is in the query string. `vite.config.ts` uses `base: './'`, so assets resolve under `/Timer/` (or any repo name / custom domain). As a safety net, `public/404.html` redirects any unknown path under the site back to the root while keeping the query string.
+### 🎉 When time is up
 
-## Development
+The timer makes it clear when the countdown has finished.
 
-```bash
-npm install
-npm run dev      # local dev server
-npm run build    # type-check + production build into dist/
-npm run preview  # serve the production build
-```
+<p align="center"><img src="assets/end.png" alt="Completed countdown showing Time's up" width="720"></p>
 
-## Deployment
+### 📱 Share with a QR code
 
-`.github/workflows/deploy.yml` builds and deploys to GitHub Pages on every push to `main`.
-One-time setup: in the repository go to **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
+Attendees can scan the code to open the same countdown on their own device.
+
+<p align="center"><img src="assets/qr.png" alt="QR code dialog for opening the shared countdown" width="560"></p>
+
+## ⚙️ Technical details
+
+For URL parameters, GitHub Pages behavior, local development, and deployment instructions, see [Technical Details](TECHNICAL_DETAILS.md).
