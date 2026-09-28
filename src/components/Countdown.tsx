@@ -108,8 +108,8 @@ export default function Countdown({ params, onReset }: Props) {
             <button className="ghost" onClick={copyLink}>
               {copied ? 'Link copied!' : 'Copy link'}
             </button>
-            <span className="sr-only" aria-live="polite">
-              {copied ? 'Share link copied to clipboard.' : ''}
+            <span className="sr-only" role="status" aria-live="polite">
+              {copied ? 'Share link copied to clipboard.' : ' '}
             </span>
           </div>
         </details>
