@@ -88,7 +88,7 @@ export default function Countdown({ params, onReset }: Props) {
       <p className="ends-at">Ends at {formatClock(end)}</p>
 
       <div className="countdown-footer">
-        <details className="share-panel" open={isShareOpen} onToggle={(e) => setIsShareOpen(e.currentTarget.open)}>
+        <details className="share-panel" onToggle={(e) => setIsShareOpen(e.currentTarget.open)}>
           <summary
             className="ghost"
             aria-label={isShareOpen ? 'Hide timer sharing options' : 'Show timer sharing options'}
@@ -108,6 +108,9 @@ export default function Countdown({ params, onReset }: Props) {
             <button className="ghost" onClick={copyLink}>
               {copied ? 'Link copied!' : 'Copy link'}
             </button>
+            <span className="sr-only" aria-live="polite">
+              {copied ? 'Share link copied to clipboard.' : ''}
+            </span>
           </div>
         </details>
 
