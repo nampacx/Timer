@@ -89,14 +89,9 @@ export default function Countdown({ params, onReset }: Props) {
 
       <div className="countdown-footer">
         <details className="share-panel" onToggle={(e) => setIsShareOpen(e.currentTarget.open)}>
-          <summary
-            className="ghost"
-            aria-label={isShareOpen ? 'Hide timer sharing options' : 'Show timer sharing options'}
-          >
+          <summary className="ghost" aria-expanded={isShareOpen}>
             <span>Share timer</span>
-            <span className="share-indicator" aria-hidden="true">
-              {isShareOpen ? '−' : '+'}
-            </span>
+            <span className="share-indicator" aria-hidden="true" />
           </summary>
           <div className="share-panel-body">
             <div className="qr share-qr">
