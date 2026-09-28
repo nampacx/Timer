@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
 import { useCountdown } from '../hooks/useCountdown'
 import { buildShareUrl, formatClock, splitDuration, type TimerParams } from '../lib/time'
-import QrModal from './QrModal'
 
 type Props = { params: TimerParams; onReset: () => void }
 
@@ -12,7 +12,6 @@ const pad = (n: number) => String(n).padStart(2, '0')
 export default function Countdown({ params, onReset }: Props) {
   const { end, start, title } = params
   const remaining = useCountdown(end)
-  const [showQr, setShowQr] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
@@ -43,8 +42,6 @@ export default function Countdown({ params, onReset }: Props) {
     setCopied(true)
     window.setTimeout(() => setCopied(false), 2000)
   }
-
-  const closeQr = useCallback(() => setShowQr(false), [])
 
   const digits = (
     <div className="digits" role="timer" aria-live="off">
@@ -89,26 +86,37 @@ export default function Countdown({ params, onReset }: Props) {
 
       <p className="ends-at">Ends at {formatClock(end)}</p>
 
-      <nav className="controls">
-        <button className="ghost" onClick={copyLink}>
-          {copied ? 'Link copied!' : 'Copy link'}
-        </button>
-        <button className="ghost" onClick={() => setShowQr(true)}>
-          QR code
-        </button>
-        <button className="ghost" onClick={toggleFullscreen}>
-          {isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
-        </button>
-        <button className="ghost" onClick={onReset}>
-          New timer
-        </button>
-      </nav>
+      <div className="countdown-footer">
+        <details className="share-panel">
+          <summary className="ghost">
+            <span>Share timer</span>
+            <span className="share-indicator" aria-hidden="true" />
+          </summary>
+          <div className="share-panel-body">
+            <div className="qr share-qr">
+              <QRCodeSVG value={shareUrl} size={256} marginSize={2} level="M" />
+            </div>
+            <a className="share-link" href={shareUrl} target="_blank" rel="noreferrer">
+              {shareUrl}
+            </a>
+            <button className="ghost" onClick={copyLink}>
+              {copied ? 'Link copied!' : 'Copy link'}
+            </button>
+          </div>
+        </details>
 
-      {showQr && (
-        <QrModal url={shareUrl} onClose={closeQr}>
-          {digits}
-        </QrModal>
-      )}
+        <div className="controls">
+          <button className="ghost" onClick={toggleFullscreen}>
+            {isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          </button>
+          <button className="link-action" onClick={onReset}>
+            Create new timer
+          </button>
+        </div>
+        <span className="sr-only" role="status" aria-live="polite">
+          {copied ? 'Share link copied to clipboard.' : ' '}
+        </span>
+      </div>
     </main>
   )
 }

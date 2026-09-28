@@ -4,7 +4,7 @@ A simple, full-screen countdown timer for presentations, talks, workshops, and b
 
 - 🕒 Choose a duration in hours, minutes, and seconds, or use a quick preset.
 - 🎤 Keep the countdown large and visible while presenting.
-- 🔗 Share a link or show its QR code so attendees can open the same timer.
+- 🔗 Share a link or open the built-in QR code so attendees can open the same timer.
 - ✍️ Add an optional title, such as "Coffee break" or a session name.
 
 ## 📸 Screenshots
@@ -17,7 +17,7 @@ Choose a duration and optional title, then start the countdown.
 
 ### ⏳ Follow the countdown
 
-The active timer fills the screen, with controls for copying the link, opening the QR code, switching to fullscreen, or starting a new timer.
+The active timer fills the screen, with controls for copying the link, opening a collapsed share section with the QR code, switching to fullscreen, or starting a new timer.
 
 <p align="center"><img src="assets/running.png" alt="Full-screen countdown with progress ring and sharing controls" width="720"></p>
 
@@ -27,11 +27,11 @@ The timer makes it clear when the countdown has finished.
 
 <p align="center"><img src="assets/end.png" alt="Completed countdown showing Time's up" width="720"></p>
 
-### 📱 Share with a QR code
+### 📱 Share the timer
 
-Attendees can scan the code to open the same countdown on their own device.
+Attendees can expand the share section to copy the link or scan the QR code on their own device.
 
-<p align="center"><img src="assets/qr.png" alt="QR code dialog for opening the shared countdown" width="560"></p>
+<p align="center"><img src="assets/qr.png" alt="QR code for opening the shared countdown" width="560"></p>
 
 ## ⚙️ Technical details
 
