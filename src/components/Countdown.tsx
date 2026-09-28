@@ -14,7 +14,6 @@ export default function Countdown({ params, onReset }: Props) {
   const remaining = useCountdown(end)
   const [copied, setCopied] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [isShareOpen, setIsShareOpen] = useState(false)
 
   const shareUrl = buildShareUrl(params)
   const { h, m, s } = splitDuration(remaining)
@@ -88,8 +87,8 @@ export default function Countdown({ params, onReset }: Props) {
       <p className="ends-at">Ends at {formatClock(end)}</p>
 
       <div className="countdown-footer">
-        <details className="share-panel" onToggle={(e) => setIsShareOpen(e.currentTarget.open)}>
-          <summary className="ghost" aria-expanded={isShareOpen}>
+        <details className="share-panel">
+          <summary className="ghost">
             <span>Share timer</span>
             <span className="share-indicator" aria-hidden="true" />
           </summary>
