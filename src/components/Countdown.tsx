@@ -14,6 +14,7 @@ export default function Countdown({ params, onReset }: Props) {
   const remaining = useCountdown(end)
   const [copied, setCopied] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isShareOpen, setIsShareOpen] = useState(false)
 
   const shareUrl = buildShareUrl(params)
   const { h, m, s } = splitDuration(remaining)
@@ -87,8 +88,16 @@ export default function Countdown({ params, onReset }: Props) {
       <p className="ends-at">Ends at {formatClock(end)}</p>
 
       <div className="countdown-footer">
-        <details className="share-panel">
-          <summary className="ghost">Share timer</summary>
+        <details className="share-panel" open={isShareOpen} onToggle={(e) => setIsShareOpen(e.currentTarget.open)}>
+          <summary
+            className="ghost"
+            aria-label={isShareOpen ? 'Hide timer sharing options' : 'Show timer sharing options'}
+          >
+            <span>Share timer</span>
+            <span className="share-indicator" aria-hidden="true">
+              {isShareOpen ? '−' : '+'}
+            </span>
+          </summary>
           <div className="share-panel-body">
             <div className="qr share-qr">
               <QRCodeSVG value={shareUrl} size={256} marginSize={2} level="M" />

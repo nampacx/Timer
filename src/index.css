@@ -231,6 +231,7 @@ button.primary:hover:not(:disabled) { filter: brightness(1.1); }
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.6rem;
   list-style: none;
   width: 100%;
   cursor: pointer;
@@ -243,6 +244,11 @@ button.primary:hover:not(:disabled) { filter: brightness(1.1); }
 }
 .share-panel summary:hover { background: rgba(255, 255, 255, 0.1); }
 .share-panel summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.share-indicator {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
 .share-panel summary::-webkit-details-marker { display: none; }
 .share-panel[open] summary { margin-bottom: 0.75rem; }
 .share-panel-body {
